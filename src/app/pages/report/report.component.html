@@ -1,0 +1,36 @@
+<h2>Отчет о фруктах</h2>
+
+<form>
+  <label for="startDate">Дата начала:</label>
+  <input type="date" id="startDate" name="startDate" [(ngModel)]="startDate">
+
+  <label for="endDate">Дата окончания:</label>
+  <input type="date" id="endDate" name="endDate" [(ngModel)]="endDate">
+
+  <button type="button" (click)="generateReport()">Сгенерировать отчет</button>
+</form>
+<div *ngIf="reports">
+  <p>Продавец: {{ reports.supplier?.supplierName }}</p>
+  <p>Общий вес: {{ reports.totalWeight }} кг</p>
+  <p>Общая стоимость: {{ reports.totalPrice }} руб.</p>
+</div>
+<table>
+  <thead>
+    <tr>
+      <th>Название фрукта</th>
+      <th>Тип фрукта</th>
+      <th>Вес</th>
+      <th>Цена</th>
+      <th>Дата доставки</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let fruitReport of reports?.fruitReportDTO">
+      <td>{{ fruitReport.fruit?.fruitName }}</td>
+      <td>{{ fruitReport.fruit?.fruitType }}</td>
+      <td>{{ fruitReport.weight }}, кг</td>
+      <td>{{ fruitReport.price }}, руб</td>
+      <td>{{ fruitReport.deliveryDate | date: 'dd.MM.yyyy'}}</td>
+    </tr>
+  </tbody>
+</table>

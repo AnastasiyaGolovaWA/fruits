@@ -1,0 +1,29 @@
+<h2>Информация о поставке</h2>
+<form>
+    <label for="id">Идентификатор поставки:</label>
+    <input type="number" id="id" name="id" [(ngModel)]="id">
+  
+    <button type="button" (click)="generateReport()">Сгенерировать отчет</button>
+  </form>
+<div *ngIf="delivery">
+  <p>Идентификатор поставки: {{ delivery!.deliveryId }}</p>
+  <p>Поставщик: {{ delivery!.supplier!.supplierName }}</p>
+  <p>Дата доставки: {{ delivery!.deliveryDate | date: 'dd.MM.yyyy'}}</p>
+</div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Название фрукта</th>
+      <th>Тип фрукта</th>
+      <th>Вес</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of delivery?.items">
+      <td>{{ item.fruit?.fruitName }}</td>
+      <td>{{ item.fruit?.fruitType }}</td>
+      <td>{{ item.weight }} кг</td>
+    </tr>
+  </tbody>
+</table>
